@@ -2,9 +2,12 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
+    "build": "tsc -p tsconfig.json",
     "dev": "vite dev",
+    "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -12,6 +15,7 @@
   "license": "ISC",
   "packageManager": "pnpm@10.33.2",
   "dependencies": {
+    "@hono/node-server": "^2.0.1",
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "dotenv": "^17.4.2",
@@ -19,6 +23,8 @@
   },
   "devDependencies": {
     "@hono/vite-dev-server": "^0.25.3",
+    "@types/node": "^20.19.39",
+    "typescript": "^5.9.3",
     "vite": "^8.0.10"
   }
 }

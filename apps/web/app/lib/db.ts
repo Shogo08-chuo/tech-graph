@@ -1,12 +1,22 @@
-import { fileURLToPath } from "node:url";
+import { existsSync } from "node:fs";
+import path from "node:path";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../../../../packages/db/generated/prisma";
 import { config } from "dotenv";
 
-config({
-  path: fileURLToPath(new URL("../../../../packages/db/.env", import.meta.url)),
-  quiet: true,
-});
+const localEnvPaths = [
+  path.resolve(process.cwd(), "../../packages/db/.env"),
+  path.resolve(process.cwd(), "packages/db/.env"),
+];
+
+const localEnvPath = localEnvPaths.find((envPath) => existsSync(envPath));
+
+if (localEnvPath) {
+  config({
+    path: localEnvPath,
+    quiet: true,
+  });
+}
 
 const databaseUrl = process.env.DATABASE_URL;
 
