@@ -21,7 +21,7 @@ TechGraph では、GitHubログインでユーザーを管理し、ログイン�
 - Auth.js と GitHub OAuth によるログイン機能実装
 - React Flow を用いた技術グラフ表示、ノード位置保存機能の実装
 - Docker / Nginx / Docker Compose による本番実行構成の作成
-- Terraform によるAWS EC2環境の構築準備
+- Terraform によるAWS EC2環境の構築と本番運用反映
 - README、デプロイ手順などのドキュメント整備
 
 ## 主な機能
@@ -62,11 +62,11 @@ GitHub OAuth の Client Secret や `AUTH_SECRET` など、公開リポジトリ�
 
 対応として、`.env.local` や `.env` を `.gitignore` に追加し、READMEには実値ではなくダミー値を記載しました。
 
-### AWSデプロイ準備
+### AWSデプロイ実施
 
 EC2へSSH接続できない場面がありました。セキュリティグループやVPCの設定は正常でしたが、利用ネットワークから22番ポートへ到達できない可能性がありました。
 
-対応として、EC2にSystems Manager用IAMロールを付与し、Session Manager経由で接続できるようにしました。また、EC2上にGit、Docker、Docker Composeを導入し、アプリをコンテナで起動する準備を行いました。
+対応として、EC2にSystems Manager用IAMロールを付与し、Session Manager経由で接続できるようにしました。また、EC2上にGit、Docker、Docker Composeを導入し、`web` / `api` / `postgres` / `nginx` を起動して公開URLからの動作確認まで実施しました。あわせて Elastic IP を関連付け、停止・起動後も同じ公開IPで運用できる構成にしました。
 
 ## 技術情報
 
