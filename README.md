@@ -223,3 +223,19 @@ CORS_ORIGINS="http://localhost:3000"
 ## デプロイ
 
 デプロイ手順は [docs/deploy.md](docs/deploy.md) にまとめています。
+
+## 本番反映状況
+
+EC2上で Docker Compose により `web` / `api` / `postgres` / `nginx` を起動し、Nginx 経由でアプリを公開できることを確認済みです。
+
+- API疎通確認: `curl http://localhost/backend/` で `Hello TechGraph API!` を確認
+- ブラウザ確認: 公開URLでトップ画面を表示可能
+- Session Manager 経由で運用可能
+
+## 運用メモ
+
+- 公開IPは Elastic IP を関連付けて固定化済み
+- EC2を停止しても同じElastic IPを使えるため、毎回のIP差し替え作業を減らせる
+- OAuth設定は以下を使用
+  - Homepage URL: `http://<ELASTIC_IP>`
+  - Authorization callback URL: `http://<ELASTIC_IP>/api/auth/callback/github`
