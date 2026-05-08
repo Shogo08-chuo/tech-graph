@@ -185,7 +185,7 @@ export default function Home() {
     e.preventDefault();
     if (!projectTitle.trim()) return;
     if (!isAuthenticated) {
-      setError("GitHubでログインしてからプロジェクトを登録してください");
+      setError("ログインしてからプロジェクトを登録してください");
       return;
     }
 
@@ -211,7 +211,7 @@ export default function Home() {
     e.preventDefault();
     if (!connProjectId || !fromTechId || !toTechId) return;
     if (!isAuthenticated || !visibleProjectIds.has(connProjectId)) {
-      setError("GitHubでログインしてから自分のプロジェクトを選択してください");
+      setError("ログインしてから自分のプロジェクトを選択してください");
       return;
     }
 
@@ -297,13 +297,22 @@ export default function Home() {
                   </button>
                 </>
               ) : (
-                <button
-                  type="button"
-                  onClick={() => void signIn("github")}
-                  className="rounded-md bg-[#172033] px-4 py-2 font-semibold text-white transition hover:bg-[#2c3850]"
-                >
-                  GitHubでログイン
-                </button>
+                <>
+                  <button
+                    type="button"
+                    onClick={() => void signIn("github")}
+                    className="rounded-md bg-[#172033] px-4 py-2 font-semibold text-white transition hover:bg-[#2c3850]"
+                  >
+                    GitHubでログイン
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => void signIn("google")}
+                    className="rounded-md border border-[#cbd3df] bg-white px-4 py-2 font-semibold text-[#172033] transition hover:bg-[#eef2f7]"
+                  >
+                    Googleでログイン
+                  </button>
+                </>
               )}
             </div>
           </section>
